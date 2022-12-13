@@ -1,1 +1,18 @@
+stages:
+  - build
 
+build-image:
+  stage: build
+  image: docker:tag
+  services:
+    - docker:dind
+  rules:
+  before_script:
+    - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWD
+  script:
+    - >
+      docker build
+      --build-arg DOCKER_USERNAME=$DOCKER_USERNAME
+      --build-arg DOCKER_PASSWD=$DOCKER_PASSWD
+      -t $DOCKER_USERNAME/tetris-game:1.0 .
+    - docker push $DOCKER_USERNAME/tetris-game1.0
