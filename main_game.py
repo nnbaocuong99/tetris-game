@@ -1,6 +1,6 @@
 import pygame
 import random
-import AI
+import ai_module
 
 colors = [
     (0, 0, 0),
